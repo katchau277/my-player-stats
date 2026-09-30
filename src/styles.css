@@ -142,3 +142,31 @@
     color: var(--color-foreground);
   }
 }
+
+/* FC 26 HOME MENU */
+.fc-menu{min-height:100vh;background:#070a0f;color:#f5f7fa;font-family:Inter,Arial,sans-serif;position:relative;overflow:hidden}
+.fc-bg{position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(216,255,0,.10),transparent 35%),linear-gradient(135deg,#090d14,#101722);pointer-events:none}
+.fc-shell{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:48px 28px}
+.fc-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:38px}
+.fc-kicker,.eyebrow{font-size:12px;font-weight:800;letter-spacing:.2em;color:#d8ff00}
+.fc-header h1{font-size:42px;line-height:1;margin:8px 0 8px;font-weight:900;letter-spacing:-.04em}
+.fc-header h1 span{color:#d8ff00}
+.fc-header p{margin:0;color:#9ca6b5}
+.fc-badge{display:flex;gap:9px;align-items:center;border:1px solid #29313e;padding:11px 15px;border-radius:8px;font-size:12px;font-weight:800}
+.hero-card{min-height:280px;border:1px solid #27303b;border-radius:18px;padding:38px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(115deg,#151d28,#0d131c);box-shadow:0 25px 80px rgba(0,0,0,.35)}
+.hero-card h2{font-size:48px;line-height:.95;margin:12px 0 16px;letter-spacing:-.04em}
+.hero-card h2 strong{color:#d8ff00}
+.hero-card p{max-width:540px;color:#aeb7c4;line-height:1.6}
+.primary{display:flex;align-items:center;gap:8px;margin-top:24px;background:#d8ff00;border:0;padding:14px 20px;border-radius:7px;font-weight:900;cursor:pointer}
+.hero-player{font-size:170px;font-weight:900;color:#202a36;line-height:1;transform:skew(-8deg);user-select:none}
+.fc-shell h3{font-size:13px;letter-spacing:.16em;margin:34px 0 14px;color:#8994a3}
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.menu-card{min-height:150px;text-align:left;color:#f5f7fa;background:#111821;border:1px solid #27303b;border-radius:12px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;gap:18px;cursor:pointer;transition:.2s}
+.menu-card:hover,.menu-card.active{border-color:#d8ff00;transform:translateY(-2px)}
+.menu-card .icon{width:40px;height:40px;border-radius:8px;background:#1c2530;display:grid;place-items:center;color:#d8ff00}
+.menu-card svg:last-child{align-self:flex-end;color:#677383}
+.menu-card b{display:block;font-size:18px;margin-bottom:6px}
+.menu-card span{display:block;color:#8792a1;font-size:13px}
+.status{margin-top:24px;color:#687383;font-size:11px;letter-spacing:.12em;display:flex;gap:9px;align-items:center}
+.dot{width:7px;height:7px;border-radius:50%;background:#d8ff00;display:inline-block}
+@media(max-width:800px){.fc-header{display:block}.fc-badge{display:inline-flex;margin-top:20px}.hero-card{padding:26px}.hero-card h2{font-size:36px}.hero-player{display:none}.menu-grid{grid-template-columns:1fr}.fc-shell{padding:28px 18px}}
