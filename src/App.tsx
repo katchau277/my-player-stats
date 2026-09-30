@@ -66,23 +66,16 @@ const seed: Career[] = [
     assists: 0,
     minutes: 0,
     trophies: 0,
-    createdAt: new Date().toISOString()
+    createdAt: "2026-09-29T00:00:00.000Z"
   }
 ];
 
 const uid = () => Math.random().toString(36).slice(2) + Date.now().toString(36);
 
 function App() {
-  const [careers, setCareers] = useState<Career[]>(() => {
-    try {
-      const saved = localStorage.getItem("my-player-stats-careers");
-      return saved ? JSON.parse(saved) : seed;
-    } catch { return seed; }
-  });
-  const [matches, setMatches] = useState<Match[]>(() => {
-    try { return JSON.parse(localStorage.getItem("my-player-stats-matches") || "[]"); }
-    catch { return []; }
-  });
+  const [careers, setCareers] = useState<Career[]>(seed);
+  const [matches, setMatches] = useState<Match[]>([]);
+  const [hydrated, setHydrated] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [page, setPage] = useState<"home" | "careers" | "career" | "settings">("home");
   const [showCareerForm, setShowCareerForm] = useState(false);
@@ -91,8 +84,24 @@ function App() {
   const [editing, setEditing] = useState(false);
   const [notice, setNotice] = useState("");
 
-  useEffect(() => localStorage.setItem("my-player-stats-careers", JSON.stringify(careers)), [careers]);
-  useEffect(() => localStorage.setItem("my-player-stats-matches", JSON.stringify(matches)), [matches]);
+  useEffect(() => {
+    try {
+      const savedCareers = localStorage.getItem("my-player-stats-careers");
+      const savedMatches = localStorage.getItem("my-player-stats-matches");
+      if (savedCareers) setCareers(JSON.parse(savedCareers));
+      if (savedMatches) setMatches(JSON.parse(savedMatches));
+    } catch {
+      // Keep the built-in demo data if browser storage is unavailable or invalid.
+    } finally {
+      setHydrated(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!hydrated) return;
+    localStorage.setItem("my-player-stats-careers", JSON.stringify(careers));
+    localStorage.setItem("my-player-stats-matches", JSON.stringify(matches));
+  }, [careers, matches, hydrated]);
 
   const selected = careers.find(c => c.id === selectedId) ?? null;
   const selectedMatches = matches.filter(m => m.careerId === selectedId);
